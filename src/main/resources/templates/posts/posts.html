@@ -1,0 +1,41 @@
+<html xmlns:th="http://thymeleaf.org">
+<!-- xmlns stands for xml namespace & it signifies that the tags in the defined namespace can only be used -->
+
+<!--In thymeleaf we can use the parts of another file known as fragment without using the whole file.
+Here we are using the fragment named logged-in present in layout.html file
+Format is th(stands for thymeleaf):replace = "file_name :: fragment_name" -->
+
+<!-- This fragment implements the basic css design & as of now we need not to worry how css is implemented-->
+<head th:replace="layout :: site-head">
+    <title> Spring Mvc Technical Blog</title>
+</head>
+
+
+<header th:replace="layout :: logged-in"></header>
+
+
+<h1>All technical posts</h1>
+<hr size="7" color="WHITE"/>
+
+<main id="posts">
+    <article th:each="p : ${posts}">
+        <!-- Here th:each = "p : ${posts}"
+        behaves as for loop.After every iteration the value of a post is assigned to variable p
+        & then this variable is used to print the attributes of a post.
+        -->
+
+        <h2 class="title" th:text="${p.title}"> Post Title</h2>
+        <div class="date">
+            <i>Posted On</i>
+            <span th:text="${#dates.format(p.date,'dd-MMM-yyyy')}"> 22-May-2018</span>
+        </div>
+
+        <p class="content" th:utext="${p.body}"> Post Content</p>
+        <hr/>
+    </article>
+</main>
+
+<!-- Here we print the title (p.title), the date on which a post is created(p.date) & body(p.body) of the post-->
+
+
+</html>

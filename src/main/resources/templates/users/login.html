@@ -1,0 +1,32 @@
+<html xmlns:th="http://thymeleaf.org">
+<!-- xmlns stands for xml namespace & it signifies that the tags in the defined namespace can only be used -->
+
+<!--In thymeleaf we can use the parts of another file known as fragment without using the whole file.
+Here we are using the fragment named logged-in present in layout.html file
+Format is th(stands for thymeleaf):replace = "file_name :: fragment_name" -->
+
+<!-- This fragment implements the basic css design & as of now we need not to worry how css is implemented-->
+<head th:replace="layout :: site-head">
+    <title>Login</title>
+</head>
+
+
+<header th:replace="layout :: logged-out"></header>
+<h1>Login in the Blog</h1>
+
+<form method="post" th:object="${registerNewUser}">
+    <div>
+        <label for="username">Username:</label>
+        <input id="username" type="text" name="username"/>
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input id="password" type="password" name="password"/>
+    </div>
+
+    <div><input type="submit" value="Login"/></div>
+
+
+</form>
+
+</html>
