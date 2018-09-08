@@ -4,11 +4,13 @@ import blog.model.Post;
 import blog.model.User;
 import blog.services.PostService;
 import blog.services.UserServiceImp;
+import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import sun.nio.cs.StandardCharsets;
 
 import java.util.List;
 
@@ -56,11 +58,9 @@ public class UserController {
     public String registerUser(RegisterNewUser registerNewUser){
         User user = new User(registerNewUser.getUsername(),
                 registerNewUser.getFullName());
-        String sha256hex = "kjn krjgnv r";
-       /* sha256hex = Hashing.sha256()
-                .hashString(registerNewUser.getPassword(), StandardCharsets.UTF_8)
-                .toString();
-        user.setPasswordHash(sha256hex);*/
+        String sha256hex = "ddd";
+                /*Hashing.sha256().hashString(registerNewUser.getPassword(), StandadCharsets.UTF_8).toString();*/
+        user.setPasswordHash(sha256hex);
         userServiceImp.registerNewUser(user);
         return "redirect:/";
     }
