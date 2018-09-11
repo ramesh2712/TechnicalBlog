@@ -1,0 +1,32 @@
+package blog.model;
+
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+public class Category {
+
+    @Id
+    private int id;
+    private String categoryType;
+
+    @ManyToMany(mappedBy = "categoryList")
+    private List<Post> posts;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCategoryType() {
+        return categoryType;
+    }
+
+    public void setCategoryType(String categoryType) {
+        this.categoryType = categoryType;
+    }
+}
