@@ -1,30 +1,27 @@
-<html xmlns:th="http://thymeleaf.org">
-<!-- xmlns stands for xml namespace & it signifies that the tags in the defined namespace can only be used -->
+<html xmln:th="http://thymeleaf.org">
 
-<!--In thymeleaf we can use the parts of another file known as fragment without using the whole file.
-Here we are using the fragment named logged-in present in layout.html file
-Format is th(stands for thymeleaf):replace = "file_name :: fragment_name" -->
-
-<!-- This fragment implements the basic css design & as of now we need not to worry how css is implemented-->
 <head th:replace="layout :: site-head">
-    <title> Spring Mvc Technical Blog</title>
+    <title>Spring MVC Technical Blog</title>
 </head>
 
-
 <header th:replace="layout :: logged-in"></header>
-
 
 <h1>Create New Post</h1>
 
 <form action="/create">
-
     <div>Post Title :</div>
     <div>
         <input type="text" name="title" size="70"/>
     </div>
-    <div>Description :</div>
+
+    <div> Description :</div>
     <div>
         <textarea rows="7" cols="100" name="body"/>
+    </div>
+
+    <div>
+        <input type="checkbox" name="SpringBlog" value="SpringBlog"/>SpringBlog
+        <input type="checkbox" name="JavaBlog" value="JavaBlog"/>JavaBlog
     </div>
 
     <div>
