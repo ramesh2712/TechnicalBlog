@@ -1,39 +1,31 @@
-<!-- This is the layout file & fragments of this file will be used in other files -->
-
-<html xmlns:th="http://thymeleaf.org">
-<!-- xmlns stands for xml namespace & it signifies that the tags in the defined namespace can only be used -->
-
-<head th:fragment="site-head">
-    <link rel="stylesheet" href="../public/styles/styles.css"
-          th:href="@{/css/styles.css}"/>
-</head>
+<html xmln:th="http://thymeleaf.org">
 
 <body>
 
-<button type="button">Create Post</button>
-<!-- Here a fragment is defined
-Format is th(stands for thymeleaf):fragment = "fragment_name" -->
-<header th:fragment="logged-in" th:remove="tag">
-    <header>
-        <a href="posts/posts.html" th:href="@{posts}">Posts</a>
-        <a href="posts/create.html" th:href="@{posts/create}">Create post</a>
-        <a href="users/register.html" th:href="@{/users/register}">Registration</a>
-
-        <div id="logged-in-info">
-            <form method="post" th:action="@{/users/logout}">
-                <input type="submit" value="Logout"/>
-            </form>
-        </div>
-        <!--Here the Dispatcher Servlet looks for a Method mapped with @RequestMapping("/posts") as indicated by th:href="@{posts}"
- Note that we have not yet created method mapped with “/posts”, so this will not work now -->
-    </header>
-</header>
+<head th:fragment="site-head">
+    <link rel="stylesheet" href="../public/css/styles.css"
+    th:href="@{/css/styles.css}"/>
+</head>
 
 <header th:fragment="logged-out" th:remove="tag">
     <header>
         <a href="users/login.html" th:href="@{/users/login}">Login</a>
         <a href="users/register.html" th:href="@{/users/register}">Registration</a>
 
+    </header>
+</header>
+
+<header th:fragment="logged-in" th:remove="tag">
+    <header>
+        <a href="posts.html" th:href="@{posts}">Posts</a>
+        <a href="posts/create.html" th:href="@{/posts/create}">Create Post</a>
+        <a href="users/register.html" th:href="@{/users/register}">Registration</a>
+        <div id="logged-in-info">
+            <!--<p><b th:utext="${user}">This text is bold</b></p>-->
+            <form method="post" th:action="@{/users/logout}">
+                <input type="submit" value="Logout"/>
+            </form>
+        </div>
     </header>
 </header>
 

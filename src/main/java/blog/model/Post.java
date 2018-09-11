@@ -1,29 +1,47 @@
 package blog.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table(name = "post",indexes = {@Index(name = "Idx", columnList = "id,title")})
 public class Post implements Serializable {
 
-    private long id;
-    private  String title;
-    private  String body;
-    private  Date date = new Date();
+    @Id
+    @Column
+    private Long id;
 
-    public Post(long id, String title, String body) {
+    @Column
+    private String title;
+
+    @Column
+    private String body;
+
+    @Column
+    private Date date = new Date();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Category> categoryList =new ArrayList<Category>();
+
+    public Post() { }
+
+    public Post(Long id, String title, String body) {
         this.id = id;
         this.title = title;
         this.body = body;
     }
 
-    public  Post() {
-
-    }
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,4 +69,19 @@ public class Post implements Serializable {
         this.date = date;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
+    }
 }

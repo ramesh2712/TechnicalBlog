@@ -1,24 +1,44 @@
 package blog.model;
 
-public class User {
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-    private String username;
+@Entity
+@Table(name = "users",indexes = {@Index(name= "idx", columnList = "fullName")})
+public class User implements Serializable {
+
+    @Id
+    @Column
+    private String userName;
+
+    @Column
     private String passwordHash;
+
+    @Column
     private String fullName;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private ProfilePhoto profilePhoto;
 
-    public User(String username, String fullName) {
-        this.username = username;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Post> posts = new ArrayList<Post>();
+
+    public User() {
+    }
+
+    public User(String userName, String fullName) {
+        this.userName = userName;
         this.fullName = fullName;
     }
 
-    public User() {}
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPasswordHash() {
@@ -35,5 +55,21 @@ public class User {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public ProfilePhoto getProfilePhoto() {
+        return profilePhoto;
+    }
+
+    public void setProfilePhoto(ProfilePhoto profilePhoto) {
+        this.profilePhoto = profilePhoto;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }
